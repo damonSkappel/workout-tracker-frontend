@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import "./TemplateList.css";
+import { Link } from "react-router-dom";
 
 const WorkoutTemplates = () => {
   const [templates, setTemplates] = useState([]);
@@ -27,10 +28,16 @@ const WorkoutTemplates = () => {
 
       {templates &&
         templates.map((template) => (
-          <div key={template.id} className="template-card">
-            <h3>{template.name}</h3>
-            <p>{"Last Session: " + template.created_at}</p>
-          </div>
+          <Link
+            to={`/templates/${template.id}/exercises`}
+            key={template.id}
+            className="template-card-link"
+          >
+            <div key={template.id} className="template-card">
+              <h3>{template.name}</h3>
+              <p>{"Last Session: " + template.created_at}</p>
+            </div>
+          </Link>
         ))}
     </div>
   );
