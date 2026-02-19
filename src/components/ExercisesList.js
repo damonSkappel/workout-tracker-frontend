@@ -24,13 +24,14 @@ const ExercisesList = () => {
   return (
     <div className="card-container">
       <h2>Exercises</h2>
-
       {exercises &&
         exercises.map((exercise) => (
           <div key={exercise.id} className="template-card">
             <h3>{exercise.exercise_name}</h3>
+            <p>Default Sets: {exercise.default_sets}</p>
           </div>
         ))}
+      <button className="start-workout-button">Start Workout</button>
     </div>
   );
 };

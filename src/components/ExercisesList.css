@@ -3,7 +3,7 @@
   border: 1px solid #d9cdcd;
   border-radius: 12px;
   width: 80pc;
-  padding: 25px;
+  padding: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background: #f4f1f1;
   transition: transform 0.2s ease;
@@ -14,4 +14,20 @@
 .template-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.start-workout-button {
+  background-color: #000000;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 15pc;
+  transition: background-color 0.3s ease;
+}
+
+.start-workout-button:hover {
+  background-color: #333333;
 }
