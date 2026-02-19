@@ -1,0 +1,25 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.template-card {
+  background-color: #100e0e;
+  border: 1px solid #d9cdcd;
+  border-radius: 12px;
+  width: 80pc;
+  padding: 25px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #f9f8f8;
+  transition: transform 0.2s ease;
+  min-width: 200px;
+  text-align: center;
+}
+
+.template-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
