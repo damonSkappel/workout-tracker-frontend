@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<WorkoutTemplates />} />
         <Route path="/templates/:id/exercises" element={<ExercisesList />} />
-        <Route path="/active-exercise" element={<ActiveExercise />} />
+        <Route path="/workout/:sessionId" element={<ActiveExercise />} />
       </Routes>
     </Router>
   );

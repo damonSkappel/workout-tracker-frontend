@@ -25,6 +25,8 @@
   cursor: pointer;
   margin-top: 20px;
   width: 15pc;
+  display: flex;
+  justify-content: center;
   transition: background-color 0.3s ease;
 }
 

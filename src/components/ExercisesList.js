@@ -27,6 +27,25 @@ const ExercisesList = () => {
       });
   }, [id]);
 
+  const handleStartWorkout = async () => {
+    try {
+      console.log("Startign workout for templade:", id);
+
+      const response = await axios.post(`http://localhost:3000/api/sessions`, {
+        user_id: 1, //Hardcode for now
+        template_id: id,
+        date: new Date().toISOString().split("T")[0], //today's date in YYYY-MM-DD format
+      });
+
+      const newSession = response.data;
+      console.log("Created session:", newSession);
+
+      navigate(`/workout/${newSession.id}`);
+    } catch (error) {
+      console.error("Error starting workout:", error);
+    }
+  };
+
   return (
     <div className="card-container">
       <button className="back-button" onClick={handleBack}>
@@ -40,9 +59,9 @@ const ExercisesList = () => {
             <p>Default Sets: {exercise.default_sets}</p>
           </div>
         ))}
-      <Link to="/active-exercise" className="start-workout-button">
+      <button className="start-workout-button" onClick={handleStartWorkout}>
         Start Workout
-      </Link>
+      </button>
     </div>
   );
 };
