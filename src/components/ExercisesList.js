@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import "./ExercisesList.css";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 const ExercisesList = () => {
   const [exercises, setExercises] = useState([]);
@@ -40,7 +40,9 @@ const ExercisesList = () => {
             <p>Default Sets: {exercise.default_sets}</p>
           </div>
         ))}
-      <button className="start-workout-button">Start Workout</button>
+      <Link to="/active-exercise" className="start-workout-button">
+        Start Workout
+      </Link>
     </div>
   );
 };

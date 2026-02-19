@@ -1,0 +1,75 @@
+.active-exercise-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.exercise-header {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.exercise-image-placeholder {
+  width: 400px;
+  height: 400px;
+  background-color: #f0f0f0;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 30px auto;
+  color: #666;
+  font-size: 16px;
+}
+
+.input-section {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-group label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.workout-input {
+  width: 80px;
+  height: 40px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.complete-set-button {
+  background-color: #000000;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 200px;
+}
+
+.complete-set-button:hover {
+  background-color: #646464;
+}
+
+.number-of-sets {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+  padding-bottom: 30px;
+}
