@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./ActiveExercise.css";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const ActiveExercise = () => {
   const { sessionId } = useParams();
-
+  const navigate = useNavigate();
   const [sessionData, setSessionData] = useState(null);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [currentSetIndex, setCurrentSetIndex] = useState(0);
@@ -54,7 +54,8 @@ const ActiveExercise = () => {
         setCurrentSetIndex(0);
       } else {
         console.log("Workout Complete!");
-        //TODO: navigate to workout summary page
+        //navigate to workout summary page
+        navigate("/workout-complete");
       }
       console.log("Set Complete");
     } catch (error) {
