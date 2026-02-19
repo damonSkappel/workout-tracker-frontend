@@ -54,6 +54,17 @@ const ActiveExercise = () => {
         setCurrentSetIndex(0);
       } else {
         console.log("Workout Complete!");
+
+        try {
+          console.log("Marking Session as complete: ");
+          await axios.put(
+            `http://localhost:3000/api/sessions/${sessionId}/complete`,
+          );
+          console.log("Session marked as complete");
+        } catch (error) {
+          console.error("Error marking session as complete:", error);
+        }
+
         //navigate to workout summary page
         navigate("/workout-complete");
       }
