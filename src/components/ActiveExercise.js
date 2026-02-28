@@ -20,6 +20,11 @@ const ActiveExercise = () => {
         console.log("Fetching Session: ", sessionId);
         const response = await axios.get(
           `http://localhost:3000/api/sessions/${sessionId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          },
         );
         console.log("Session data:", response.data);
         setSessionData(response.data);
@@ -37,11 +42,20 @@ const ActiveExercise = () => {
       console.log("Weight: ", weightInput, "Reps: ", repsInput);
 
       //Update teh set in database
-      await axios.put(`http://localhost:3000/api/sets/${currentSet.id}`, {
-        weight: weightInput,
-        reps: repsInput,
-        completed: true,
-      });
+      await axios.put(
+        `http://localhost:3000/api/sets/${currentSet.id}`,
+
+        {
+          weight: weightInput,
+          reps: repsInput,
+          completed: true,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
 
       //clear inputs
       setWeightInput("");
@@ -59,6 +73,11 @@ const ActiveExercise = () => {
           console.log("Marking Session as complete: ");
           await axios.put(
             `http://localhost:3000/api/sessions/${sessionId}/complete`,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            },
           );
           console.log("Session marked as complete");
         } catch (error) {

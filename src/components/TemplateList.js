@@ -12,7 +12,11 @@ const WorkoutTemplates = () => {
     console.log("useEffect running!");
 
     axios
-      .get("http://localhost:3000/api/templates")
+      .get("http://localhost:3000/api/templates", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
         console.log("API response:", response.data);
         setTemplates(response.data);

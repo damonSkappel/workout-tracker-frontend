@@ -17,7 +17,11 @@ const ExercisesList = () => {
     console.log("useEffect running!");
 
     axios
-      .get(`http://localhost:3000/api/templates/${id}/exercises`)
+      .get(`http://localhost:3000/api/templates/${id}/exercises`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
         console.log("API response:", response.data);
         setExercises(response.data);
@@ -31,11 +35,19 @@ const ExercisesList = () => {
     try {
       console.log("Startign workout for templade:", id);
 
-      const response = await axios.post(`http://localhost:3000/api/sessions`, {
-        user_id: 1, //Hardcode for now
-        template_id: id,
-        date: new Date().toISOString().split("T")[0], //today's date in YYYY-MM-DD format
-      });
+      const response = await axios.post(
+        `http://localhost:3000/api/sessions`,
+        {
+          user_id: 1, //Hardcode for now
+          template_id: id,
+          date: new Date().toISOString().split("T")[0], //today's date in YYYY-MM-DD format
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
 
       const newSession = response.data;
       console.log("Created session:", newSession);
