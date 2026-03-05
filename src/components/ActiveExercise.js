@@ -72,7 +72,8 @@ const ActiveExercise = () => {
         try {
           console.log("Marking Session as complete: ");
           await axios.put(
-            `http://localhost:3000/api/sessions/${sessionId}/complete`,
+            `http://localhost:3000/api/sessions/${sessionId}`,
+            {},
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

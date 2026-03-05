@@ -9,6 +9,9 @@ const ExercisesList = () => {
   const [exercises, setExercises] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
+  const [showForm, setShowForm] = useState(false);
+  const [newExerciseName, setNewExerciseName] = useState("");
+  //const [newExerciseSets, setNewExerciseSets] = useState("");  sets are defaulted to 3 for now, but this will be used later.
 
   const handleBack = () => {
     navigate("/");
@@ -38,7 +41,6 @@ const ExercisesList = () => {
       const response = await axios.post(
         `http://localhost:3000/api/sessions`,
         {
-          user_id: 1, //Hardcode for now
           template_id: id,
           date: new Date().toISOString().split("T")[0], //today's date in YYYY-MM-DD format
         },
@@ -58,12 +60,50 @@ const ExercisesList = () => {
     }
   };
 
+  const handleCreateExercise = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/api/templates/${id}/exercises`,
+        { exercise_name: newExerciseName, order_index: exercises.length + 1 },
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        },
+      );
+
+      const newExercise = response.data;
+      setShowForm(false);
+      setNewExerciseName("");
+      window.location.href = `/templates/${id}/exercises`;
+    } catch (error) {
+      console.log("Error creating exercise: ", error);
+    }
+  };
+
   return (
     <div className="card-container">
       <button className="back-button" onClick={handleBack}>
         Back
       </button>
       <h2>Exercises</h2>
+
+      <button onClick={() => setShowForm(!showForm)}>
+        {showForm ? "Cancel" : "Add Exercise"}
+      </button>
+
+      {showForm && (
+        <form onSubmit={handleCreateExercise}>
+          <input
+            type="text"
+            placeholder="Exercise Name"
+            value={newExerciseName}
+            onChange={(e) => setNewExerciseName(e.target.value)}
+          />
+          <button type="submit"> Create Exercise</button>
+        </form>
+      )}
+
       {exercises &&
         exercises.map((exercise) => (
           <div key={exercise.id} className="template-card">

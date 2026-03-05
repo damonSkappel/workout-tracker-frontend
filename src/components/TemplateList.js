@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 
 const WorkoutTemplates = () => {
   const [templates, setTemplates] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [newTemplateName, setNewTemplateName] = useState("");
 
   useEffect(() => {
     console.log("useEffect running!");
@@ -26,9 +28,45 @@ const WorkoutTemplates = () => {
       });
   }, []);
 
+  const handleCreateTemplate = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/templates",
+        { name: newTemplateName },
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        },
+      );
+
+      const newTemplate = response.data;
+      setShowForm(false);
+      setNewTemplateName("");
+      window.location.href = `/templates/${newTemplate.id}/exercises`;
+    } catch (error) {
+      console.log("Error creating template:", error);
+    }
+  };
+
   return (
     <div className="card-container">
       <h2> Workout Templates</h2>
+      <button onClick={() => setShowForm(!showForm)}>
+        {showForm ? "Cancel" : "Create Template"}
+      </button>
+
+      {showForm && (
+        <form onSubmit={handleCreateTemplate}>
+          <input
+            type="text"
+            placeholder="Template Name"
+            value={newTemplateName}
+            onChange={(e) => setNewTemplateName(e.target.value)}
+          />
+          <button type="submit">Save</button>
+        </form>
+      )}
 
       {templates &&
         templates.map((template) => (
